@@ -17,9 +17,7 @@ const Grid = ({
 					isAlive={Boolean(grid[i][k])}
 					key={`${i}-${k}`}
 					onClick={() => {
-						let newGrid = JSON.parse(JSON.stringify(grid))
-						newGrid[i][k] = grid[i][k] ? 0 : 1
-						onSetGrid(newGrid)
+						onSetGrid(i, k, grid[i][k] ? 0 : 1)
 					}}
 				>
 					{Boolean(grid[i][k]) && !disableImages && (
@@ -35,7 +33,7 @@ type GridProps = {
 	numCols: number
 	grid: number[][]
 	disableImages?: boolean
-	onSetGrid: (grid: number[][]) => void
+	onSetGrid: (col: number, row: number, state: 0 | 1) => void
 }
 
 export default Grid

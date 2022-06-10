@@ -12,8 +12,8 @@ const Rules = ({ rules = DEFAULT_GAME_RULES, ...props }: RulesProps) => (
 	<Box {...props}>
 		<Typography variant="h3">Rules</Typography>
 		<List>
-			{rules.map(rule => (
-				<ListItem disablePadding>
+			{rules.map((rule, index) => (
+				<ListItem disablePadding key={`rule-${index}`}>
 					<ListItemIconStyled>
 						<LabelOutlinedIcon />
 					</ListItemIconStyled>

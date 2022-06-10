@@ -19,8 +19,9 @@ const Home: NextPage = () => {
 		generateRandomGrid,
 		stopStartSimulation,
 		clearGrid,
-		setGrid,
+		changeCellState,
 		stringifyGrid,
+		resetGrid,
 	} = useGameOfLife()
 
 	return (
@@ -30,7 +31,7 @@ const Home: NextPage = () => {
 					<Grid
 						numCols={numCols}
 						grid={grid}
-						onSetGrid={setGrid}
+						onSetGrid={changeCellState}
 						disableImages
 					/>
 					<Box
@@ -43,11 +44,14 @@ const Home: NextPage = () => {
 						<StandardButton onClick={stopStartSimulation}>
 							{isRunning ? 'Stop' : 'Start'}
 						</StandardButton>
-						<StandardButton onClick={clearGrid} disabled={isRunning}>
-							Clear board
-						</StandardButton>
 						<StandardButton onClick={generateRandomGrid} disabled={isRunning}>
 							Random
+						</StandardButton>
+						<StandardButton onClick={clearGrid} disabled={isRunning}>
+							Clear
+						</StandardButton>
+						<StandardButton onClick={resetGrid} disabled={isRunning}>
+							Rest
 						</StandardButton>
 					</Box>
 				</Box>
