@@ -1,4 +1,4 @@
-import { Grid } from 'types/grid'
+import { Grid } from './types'
 
 export const randomTiles = (numRows: number, numCols: number): Grid => {
 	const rows = []

@@ -1,0 +1,17 @@
+[
+	{
+		"type": "img",
+		"resource": "living-cell.webp",
+		"url": "https://www.iconfinder.com/icons/5284739/biology_cell_living_microbe_icon"
+	},
+	{
+		"type": "code",
+		"resource": "standard-buttons-css",
+		"url": "https://uiverse.io/detail/nikk7007/blue-mayfly-40"
+	},
+	{
+		"type": "code",
+		"resource": "basic code",
+		"url": "https://dev.to/toluagboola/build-the-game-of-life-with-react-and-typescript-5e0d"
+	}
+]
