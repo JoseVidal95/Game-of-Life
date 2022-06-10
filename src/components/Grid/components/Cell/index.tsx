@@ -1,7 +1,7 @@
 import styled from '@mui/system/styled'
 import Box, { BoxProps } from '@mui/material/Box'
 
-const Cell = styled(({ isAlive, ...props }: CellPropsTypes) => (
+const Cell = styled(({ isAlive = false, ...props }: CellPropsTypes) => (
 	<Box {...props} />
 ))(({ isAlive, theme }) => ({
 	width: 20,
@@ -13,7 +13,7 @@ const Cell = styled(({ isAlive, ...props }: CellPropsTypes) => (
 }))
 
 type CellPropsTypes = BoxProps & {
-	isAlive: boolean
+	isAlive?: boolean
 }
 
 export default Cell

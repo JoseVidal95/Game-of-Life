@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useRef, useState, useEffect } from 'react'
 import useInterval from '../useInterval'
 import { POSITIONS, NUM_COLS, NUM_ROWS, MILLISECONDS_DELAY } from './constants'
 import { generateEmptyGrid, randomTiles } from './helpers'
@@ -10,6 +10,7 @@ const useGameOfLife = (
 	millisecondsDelay = MILLISECONDS_DELAY
 ) => {
 	const [grid, setGrid] = useState(() => generateEmptyGrid(numRows, numCols))
+	const [initialGrid, setInitialGrid] = useState<string>()
 	const [isRunning, setRunning] = useState(false)
 
 	const runningRef = useRef(isRunning)
@@ -50,18 +51,42 @@ const useGameOfLife = (
 	}, millisecondsDelay)
 
 	const stopStartSimulation = () => {
-		setRunning(!isRunning)
+		setRunning(prev => !prev)
+		if (!initialGrid) {
+			setInitialGrid(stringifyGrid())
+		}
 
 		if (!isRunning) {
 			runningRef.current = true
 		}
 	}
 
-	const clearGrid = () => setGrid(generateEmptyGrid(numRows, numCols))
+	const clearGrid = () => {
+		setGrid(generateEmptyGrid(numRows, numCols))
 
-	const generateRandomGrid = () => setGrid(randomTiles(numRows, numCols))
+		if (initialGrid) {
+			setInitialGrid('')
+		}
+	}
+
+	const generateRandomGrid = () => {
+		setGrid(randomTiles(numRows, numCols))
+	}
 
 	const stringifyGrid = () => JSON.stringify(grid)
+
+	const resetGrid = () => {
+		if (initialGrid) {
+			setGrid(JSON.parse(initialGrid))
+		}
+	}
+
+	const changeCellState = (col: number, row: number, state: 0 | 1) => {
+		let newGrid = JSON.parse(JSON.stringify(grid))
+		newGrid[col][row] = state
+
+		setGrid(newGrid)
+	}
 
 	return {
 		isRunning,
@@ -72,8 +97,9 @@ const useGameOfLife = (
 		generateRandomGrid,
 		stopStartSimulation,
 		clearGrid,
-		setGrid,
+		changeCellState,
 		stringifyGrid,
+		resetGrid,
 	}
 }
 
